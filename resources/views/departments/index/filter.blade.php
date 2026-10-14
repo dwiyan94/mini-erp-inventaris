@@ -15,16 +15,6 @@
                 </span>
             </div>
         </form>
-    
-
-    {{-- <div class="col-sm-3">
-        <div class="input-group">
-            <input type="text" placeholder="Search" class="input-sm form-control"> 
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-sm btn-primary"> Go!</button>
-            </span>
-        </div>
-    </div>    --}}
     </div>
 </div>
           

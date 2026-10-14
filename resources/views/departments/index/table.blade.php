@@ -46,7 +46,6 @@
     </table>
 </div>
 
-<!-- Baris Informasi & Paginasi -->
 <div class="row" style="margin-top: 15px;">
     <div class="col-sm-6 text-left" style="padding-top: 7px;">
         Showing {{ $departments->firstItem() ?? 0 }} to {{ $departments->lastItem() ?? 0 }} of {{ $departments->total() }} entries

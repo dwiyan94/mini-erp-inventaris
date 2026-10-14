@@ -15,7 +15,6 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <!-- Kolom Kiri: Informasi Akun & Foto -->
         <div class="col-lg-4">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -40,9 +39,7 @@
             </div>
         </div>
 
-        <!-- Kolom Kanan: Detail Pekerja & Role -->
         <div class="col-lg-8">
-            <!-- Data Pekerja Terkait -->
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Informasi Kepegawaian</h5>
@@ -83,7 +80,6 @@
                 </div>
             </div>
 
-            <!-- Role & Hak Akses -->
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Role & Hak Akses Sistem</h5>

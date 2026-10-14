@@ -13,12 +13,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StockMutationController;
 use App\Http\Controllers\Auth\RegisterController;
 
-// Halaman awal langsung ke form login
 Route::get('/', function () {
     return view('auth.login');
 });
 
-// Rute Tamu (Belum Login)
 Route::middleware('guest')->group(function () {
 
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -28,14 +26,12 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [RegisterController::class, 'register']);
 });
 
-// 1. Rute Dasar (Bisa diakses oleh SEMUA user yang sudah login)
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/profile', [UserController::class, 'profile'])->name('users.profile');
 });
 
-// 2. Rute Khusus Modul User & Role (Hanya untuk yang punya izin view-users / view-roles)
 Route::middleware(['auth', 'permission:view-users'])->group(function () {
     Route::resource('users', UserController::class)->except(['create', 'edit']);
 });
@@ -57,18 +53,15 @@ Route::middleware(['auth', 'permission:view-employees'])->group(function () {
     Route::resource('employees', EmployeeController::class);
 });
 
-// Di dalam grup rute auth utama Anda:
 Route::middleware(['auth', \App\Http\Middleware\CheckSingleSession::class])->group(function () {
 
     Route::get('/products/import-demo', [ProductController::class, 'importDemo'])->name('products.import-demo');
         Route::get('/products/reset-demo', [ProductController::class, 'resetDemo'])->name('products.reset-demo');
     
-    // Rute Modul Produk (Dilindungi permission view-products, create-products, dll jika ada)
     Route::middleware(['permission:view-products'])->group(function () {
         Route::resource('products', ProductController::class)->except(['create', 'edit']);
     });
 
-    // Rute Modul Mutasi Stok (Dilindungi permission view-stock-mutations)
     Route::middleware(['permission:view-stock_mutations'])->group(function () {
         Route::resource('stock_mutations', StockMutationController::class)->only(['index', 'store']);
 

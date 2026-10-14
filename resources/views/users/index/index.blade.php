@@ -29,10 +29,8 @@
                 </div>
                 <div class="ibox-content">                   
 
-                    <!-- Filter / Pencarian -->
                     @include('users.index.filter')
 
-                    <!-- Tabel Data -->
                     @include('users.index.table')
                 </div>
             </div>
@@ -40,7 +38,6 @@
     </div>
 </div>
 
-<!-- Modal Form -->
 @include('users.form.form')
 
 @endsection

@@ -57,7 +57,6 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Role Akses</label>
                         <div class="col-sm-9">
-                            <!-- Tambahkan atribut multiple dan ganti name menjadi roles[] -->
                             <select name="roles[]" id="userRole" class="chosen-select form-control" data-placeholder="-- Pilih Role (Bisa Lebih dari Satu) --" multiple required>
                                 @foreach($roles as $role)
                                     <option value="{{ $role->name }}">{{ ucfirst($role->name) }}</option>

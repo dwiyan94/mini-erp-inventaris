@@ -16,7 +16,6 @@ class RoleController extends Controller
         
         $search = $request->input('search');
 
-        // Mengambil data role beserta relasi permissions
         $roles = Role::with('permissions')
             ->when($search, function ($query, $search) {
                 return $query->where('name', 'ilike', '%' . $search . '%');
@@ -25,7 +24,6 @@ class RoleController extends Controller
             ->paginate(15)
             ->withQueryString();
 
-        // Mengambil seluruh permissions untuk pilihan di modal form
         $permissions = Permission::all();
 
         return view('roles.index.index', compact('roles', 'permissions'));
@@ -64,7 +62,6 @@ class RoleController extends Controller
 
     public function destroy(Role $role)
     {
-        // Mencegah penghapusan role bawaan yang krusial
         if (!auth()->user()->can('delete-roles')) {
             abort(403, 'Anda tidak memiliki hak akses.');
         }

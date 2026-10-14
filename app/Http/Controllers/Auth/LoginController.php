@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    // Menampilkan halaman login
     public function showLoginForm()
     {
         return view('auth.login');
@@ -24,10 +23,8 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
 
-            // BUAT TOKEN SESI UNIK
             $sessionId = uniqid('', true);
             
-            // SIMPAN KE DATABASE & SESSION
             $user = Auth::user();
             $user->current_session_id = $sessionId;
             $user->save();
@@ -42,7 +39,6 @@ class LoginController extends Controller
         ]);
     }
 
-    // Proses Logout
     public function logout(Request $request)
     {
         Auth::logout();

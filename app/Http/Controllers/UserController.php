@@ -29,7 +29,6 @@ class UserController extends Controller
             ->paginate(15)
             ->withQueryString();
 
-        // Data pendukung untuk pilihan di modal (Employee dan Roles)
         $employees = Employee::all();
         $roles = Role::all();
 
@@ -61,7 +60,6 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Berikan banyak role sekaligus
         $user->assignRole($request->roles);
 
         return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan.');
@@ -69,7 +67,6 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        // Aturan dasar validasi
         $rules = [
             'employee_id' => 'nullable|exists:employees,id',
             'name' => 'required|string|max:255',
@@ -78,7 +75,6 @@ class UserController extends Controller
             'roles.*' => 'exists:roles,name',
         ];
 
-        // Jika kolom password diisi oleh user, baru terapkan aturan keamanan ketat
         if ($request->filled('password')) {
             $rules['password'] = [
                 'required',
@@ -92,21 +88,18 @@ class UserController extends Controller
 
         $request->validate($rules);
 
-        // Siapkan data yang akan diupdate
         $data = [
             'employee_id' => $request->employee_id,
             'name' => $request->name,
             'email' => $request->email,
         ];
 
-        // Update password hanya jika diisi
         if ($request->filled('password')) {
             $data['password'] = \Illuminate\Support\Facades\Hash::make($request->password);
         }
 
         $user->update($data);
 
-        // Sinkronisasi multi-role
         $user->syncRoles($request->roles);
 
         return redirect()->route('users.index')->with('success', 'User berhasil diperbarui.');
@@ -129,7 +122,6 @@ class UserController extends Controller
 
     public function profile()
     {
-        // Mengambil user yang sedang login saat ini beserta relasinya
         $user = auth()->user()->load([
             'employee.position.department', 
             'roles.permissions'

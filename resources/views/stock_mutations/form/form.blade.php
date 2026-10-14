@@ -11,14 +11,6 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Pilih Produk</label>
                         <div class="col-sm-9">
-                            {{-- <select name="product_id" class="form-control chosen-select" required>
-                                <option value="">-- Cari / Pilih Produk --</option>
-                                @foreach(\App\Models\Product::all() as $product)
-                                    <option value="{{ $product->id }}" {{ old('product_id') == $product->id ? 'selected' : '' }}>
-                                        [{{ $product->sku }}] {{ $product->name }} (Stok: {{ $product->stock }})
-                                    </option>
-                                @endforeach
-                            </select> --}}
                             <select name="product_id" id="productSelect" class="form-control chosen-select" required>
                                 <option value="">-- Cari / Pilih Produk --</option>
                                 @foreach(\App\Models\Product::all() as $product)
@@ -41,7 +33,6 @@
                                 </span>
                             </label>
 
-                            <!-- Radio Button Keluar (OUT) -->
                             <label class="radio-inline" style="cursor: pointer;">
                                 <input type="radio" name="type" id="typeOut" value="out" {{ old('type') == 'out' ? 'checked' : '' }} required> 
                                 <span class="label label-danger" style="background-color: #ed5565; padding: 4px 10px; font-size: 12px;">
@@ -152,7 +143,7 @@
                         <th style="background-color: #f9f9f9;">Foto Bukti</th>
                         <td class="text-center">
                             <div id="det-photo-container">
-                                <!-- Ditampilkan dinamis via JS -->
+                                
                             </div>
                         </td>
                     </tr>

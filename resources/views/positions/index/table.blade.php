@@ -14,8 +14,6 @@
             <tr>
                 <td class="text-center">{{ $positions->firstItem() + $key }}</td>
                 <td>{{ $position->department->name ?? '-' }}</td>
-                {{-- <td>{{ $position->name }}</td> --}}
-                <!-- Ubah pada baris tampilan tabel posisi -->
                 <td>
                     <a href="{{ route('positions.show', $position->id) }}" style="color: inherit; text-decoration: none;" title="Klik untuk melihat daftar pekerja">
                         <span style="border-bottom: 1px;">{{ $position->name }}</span>

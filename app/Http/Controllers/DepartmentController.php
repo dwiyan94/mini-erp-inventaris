@@ -16,13 +16,12 @@ class DepartmentController extends Controller
 
         $search = $request->input('search');
 
-        // Mengambil data dengan Paginasi (misal 15 data per halaman) dan pencarian database
         $departments = Department::when($search, function ($query, $search) {
                 return $query->where('name', 'ilike', '%' . $search . '%');
             })
             ->orderBy('id', 'desc')
-            ->paginate(25) // Batasi jumlah baris per halaman
-            ->withQueryString(); // Memastikan parameter pencarian tetap ada saat berpindah halaman
+            ->paginate(25) 
+            ->withQueryString(); 
 
         return view('departments.index.index', compact('departments'));
     }
@@ -47,13 +46,12 @@ class DepartmentController extends Controller
             abort(403, 'Anda tidak memiliki hak akses.');
         }
 
-        $department->delete(); // Soft delete
+        $department->delete(); 
         return redirect()->route('departments.index')->with('success', 'Data Departemen berhasil dihapus.');
     }
 
     public function show(Department $department)
     {
-        // Memuat relasi posisi yang terikat pada departemen ini (beserta soft deletes jika ada)
         $department->load('positions');
 
         return view('departments.single.index', compact('department'));

@@ -13,7 +13,6 @@ class CheckSingleSession
         if (Auth::check()) {
             $user = Auth::user();
             
-            // Bandingkan sesi di browser dengan database
             if ($user->current_session_id && session('user_session_id') !== $user->current_session_id) {
                 Auth::logout();
                 $request->session()->invalidate();

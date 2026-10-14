@@ -36,7 +36,6 @@
     @endif
 
     <div class="row">
-        <!-- Kolom Informasi Produk -->
         <div class="col-lg-4">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -95,14 +94,12 @@
             </div>
         </div>
 
-        <!-- Kolom Histori Mutasi Stok -->
         <div class="col-lg-8">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Riwayat Mutasi Stok</h5>
                 </div>
                 <div class="ibox-content">
-                    <!-- Form Filter Tanggal yang Lebih Elegan & Rapi -->
                     <form method="GET" action="{{ route('products.show', $product->id) }}" class="form-inline m-b-md" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
                         
                         <div class="form-group">
@@ -172,7 +169,6 @@
                         </table>
                     </div>
 
-                    <!-- Pagination Links -->
                     <div class="row" style="margin-top: 15px;">
                         <div class="col-lg-12 text-right">
                             {{ $stockMutations->links() }}
@@ -185,7 +181,6 @@
     </div>
 </div>
 
-<!-- Modal Mutasi Stok (In / Out) -->
 <div class="modal inmodal" id="quickMutationModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content animated bounceInRight">
@@ -263,7 +258,6 @@
         $('#quickMutationModal').modal('show');
     }
 
-    // Validasi real-time saat user mengetik jumlah keluar di halaman show
     $('#quantityInput').on('input', function() {
         let type = $('#mutationTypeInput').val();
         let currentStock = parseInt('{{ $product->stock }}') || 0;

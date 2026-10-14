@@ -11,10 +11,8 @@ class RoleAndUserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // 1. Buat Roles dengan variabel yang unik
         $roleAdmin   = Role::firstOrCreate(['name' => 'admin']);
         $roleHr      = Role::firstOrCreate(['name' => 'hr']);
         $roleEmp     = Role::firstOrCreate(['name' => 'employee']);
@@ -22,46 +20,44 @@ class RoleAndUserSeeder extends Seeder
         $roleOwner   = Role::firstOrCreate(['name' => 'owner']);
         $roleManajer = Role::firstOrCreate(['name' => 'manajer']);
 
-        // 2. Buat User & Berikan Multi-Role (Contoh: Admin memiliki role admin DAN owner)
         $admin = User::create([
-            'name' => 'Dwiyan Primastia Saputra',
-            'email' => 'dwiyanprimastia@gmail.com',
+            'name' => 'SuperAdmin',
+            'email' => 'admin@syailendra.com',
             'password' => Hash::make('asdasd123'),
         ]);
-        // Satu user memegang beberapa role sekaligus
         $admin->assignRole(['admin', 'owner']);
 
         $hr = User::create([
-            'name' => 'Cahyani',
-            'email' => 'cahyani.hr@syailendra.com',
+            'name' => 'HR',
+            'email' => 'hr@syailendra.com',
             'password' => Hash::make('password123'),
         ]);
         $hr->assignRole('hr');
 
         $employee = User::create([
-            'name' => 'Budi',
-            'email' => 'budi@Syailendra.com',
+            'name' => 'employee',
+            'email' => 'employee@Syailendra.com',
             'password' => Hash::make('password123'),
         ]);
         $employee->assignRole('employee');
 
         $gudangUser = User::create([
-            'name' => 'Agus SS',
-            'email' => 'Aguss.gudang@syailendra.com',
+            'name' => 'gudang',
+            'email' => 'gudang@syailendra.com',
             'password' => Hash::make('password123'),
         ]);
         $gudangUser->assignRole('gudang');
 
         $ownerUser = User::create([
-            'name' => 'Rico Setyadi',
-            'email' => 'ricosetyadi@syailendra.com',
+            'name' => 'owner',
+            'email' => 'owner@syailendra.com',
             'password' => Hash::make('password123'),
         ]);
         $ownerUser->assignRole('owner');
 
         $managerUser = User::create([
-            'name' => 'Marco Ali',
-            'email' => 'alimarco@syailendra.com',
+            'name' => 'manajer',
+            'email' => 'manajer@syailendra.com',
             'password' => Hash::make('password123'),
         ]);
         $managerUser->assignRole('manajer');

@@ -60,7 +60,6 @@
     </table>
 </div>
 
-<!-- Informasi & Paginasi -->
 <div class="row" style="margin-top: 15px;">
     <div class="col-sm-6 text-left" style="padding-top: 7px;">
         Showing {{ $users->firstItem() ?? 0 }} to {{ $users->lastItem() ?? 0 }} of {{ $users->total() }} entries

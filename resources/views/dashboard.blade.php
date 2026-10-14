@@ -18,7 +18,6 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 
     @role(['admin', 'gudang', 'owner'])
-    <!-- BARIS KARTU METRIK UTAMA -->
     <div class="row">
         <!-- Widget Total SKU -->
         <div class="col-lg-3 col-md-6">

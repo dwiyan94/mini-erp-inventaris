@@ -28,12 +28,6 @@
                     <h5>Daftar Seluruh Departemen Perusahaan</h5>
                 </div>
                 <div class="ibox-content">
-                    {{-- @if(session('success'))
-                        <div class="alert alert-success alert-dismissable">
-                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                            {{ session('success') }}
-                        </div>
-                    @endif --}}
 
                     @if($errors->any())
                         <div class="alert alert-danger alert-dismissable">
@@ -42,10 +36,8 @@
                         </div>
                     @endif
 
-                    <!-- Panggil Komponen Filter -->
                     @include('departments.index.filter')
 
-                    <!-- Panggil Komponen Tabel -->
                     @include('departments.index.table')
 
                 </div>
@@ -54,12 +46,10 @@
     </div>
 </div>
 
-<!-- Panggil Komponen Modal Form -->
 @include('departments.form.form')
 
 @endsection
 
 @push('scripts')
-    <!-- Panggil Komponen Javascript -->
     @include('departments.index.js')
 @endpush

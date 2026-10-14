@@ -35,10 +35,8 @@
                         </div>
                     @endif
 
-                    <!-- Filter / Search -->
                     @include('positions.index.filter')
 
-                    <!-- Tabel Data -->
                     @include('positions.index.table')
                 </div>
             </div>
@@ -46,7 +44,6 @@
     </div>
 </div>
 
-<!-- Modal Form -->
 @include('positions.form.form')
 
 @endsection

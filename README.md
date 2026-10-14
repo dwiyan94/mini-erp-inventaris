@@ -43,8 +43,9 @@ Aplikasi simulasi manajemen inventaris berbasis web yang dirancang untuk mengelo
 
 ## 🔑 Akun Demo
 Sistem dilengkapi dengan akun simulasi bawaan untuk pengujian hak akses:
-* **Admin / Gudang**: `admin@syailendra.test` / `Password123!`
-* **Manager**: `manager@syailendra.test` / `Password123!`
+* **Admin**: `admin@syailendra.test` / `Password123`
+* **Gudang**: `gudang@syailendra.test` / `Password123`
+* **Manager**: `manager@syailendra.test` / `Password123`
 
 ---
 
@@ -63,19 +64,20 @@ Sistem dilengkapi dengan akun simulasi bawaan untuk pengujian hak akses:
    DB_USERNAME=postgres
    DB_PASSWORD=password_anda
 
-3. Instalasi Dependensi & Migrasi:
+3. **Instalasi Dependensi & Migrasi**:
    Jalankan perintah berikut melalui terminal di root direktori proyek:
    ```env
    composer install
    php artisan key:generate
    php artisan migrate --seed
 
-4. Menjalankan Server Lokal:
+4. **Menjalankan Server Lokal**:
    ```env
    php artisan serve
 
    Akses aplikasi via browser di: http://127.0.0.1:8000
-5. Menjalankan Unit Test:
+
+5. **Menjalankan Unit Test**:
    Untuk memverifikasi keunikan SKU, batas stok keluar, dan perhitungan valuasi inventaris secara otomatis:
    ```env
    php artisan test

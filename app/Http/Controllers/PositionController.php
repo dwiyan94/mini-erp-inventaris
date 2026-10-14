@@ -16,7 +16,6 @@ class PositionController extends Controller
         
         $search = $request->input('search');
 
-        // Mengambil data posisi beserta relasi departemen dengan paginasi dan pencarian
         $positions = Position::with('department')
             ->when($search, function ($query, $search) {
                 return $query->where('name', 'ilike', '%' . $search . '%')
@@ -28,7 +27,6 @@ class PositionController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        // Mengirim data departments untuk pilihan select di modal form
         $departments = Department::all();
 
         return view('positions.index.index', compact('positions', 'departments'));
@@ -73,7 +71,6 @@ class PositionController extends Controller
 
     public function show(Position $position)
     {
-        // Memuat relasi departemen dan pekerja yang terikat pada posisi ini
         $position->load('department', 'employees');
 
         return view('positions.single.index', compact('position'));

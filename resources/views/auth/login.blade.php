@@ -32,7 +32,6 @@
             background-color: #ffffff;
             border-color: #1ab394;
         }
-        /* Penyesuaian input group untuk tombol mata password */
         .input-group-addon {
             background-color: #fcfcfc;
             border-color: #e5e6e7;

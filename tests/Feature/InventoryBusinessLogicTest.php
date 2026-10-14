@@ -5,12 +5,12 @@ namespace Tests\Feature;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\StockMutation;
-use Illuminate\Foundation\Testing\DatabaseMigrations; // Ganti RefreshDatabase dengan ini
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class InventoryBusinessLogicTest extends TestCase
 {
-    use DatabaseMigrations; // Menggunakan migrasi bersih per tes tanpa nested transaction konflik SQLite
+    use DatabaseMigrations;
 
     public function test_product_sku_must_be_unique()
     {

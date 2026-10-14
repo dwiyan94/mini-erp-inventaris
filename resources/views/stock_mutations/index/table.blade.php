@@ -2,7 +2,6 @@
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <!-- Sorting Tanggal & Waktu -->
                 <th>
                     <a href="{{ route('stock_mutations.index', array_merge(request()->all(), ['sort_by' => 'created_at', 'direction' => ($sortBy == 'created_at' && $direction == 'asc') ? 'desc' : 'asc'])) }}" style="color: inherit; text-decoration: none;">
                         Tanggal
@@ -16,7 +15,6 @@
 
                 <th>SKU & Nama Barang</th>
 
-                <!-- Sorting Tipe (Masuk/Keluar) -->
                 <th class="text-center" style="width: 12%;">
                     <a href="{{ route('stock_mutations.index', array_merge(request()->all(), ['sort_by' => 'type', 'direction' => ($sortBy == 'type' && $direction == 'asc') ? 'desc' : 'asc'])) }}" style="color: inherit; text-decoration: none;">
                         Tipe 
@@ -28,7 +26,6 @@
                     </a>
                 </th>
 
-                <!-- Sorting Jumlah Kuantitas -->
                 <th class="text-center" style="width: 10%;">
                     <a href="{{ route('stock_mutations.index', array_merge(request()->all(), ['sort_by' => 'quantity', 'direction' => ($sortBy == 'quantity' && $direction == 'asc') ? 'desc' : 'asc'])) }}" style="color: inherit; text-decoration: none;">
                         Jumlah 
@@ -40,7 +37,6 @@
                     </a>
                 </th>
 
-                <!-- Sorting Stok Sebelum -->
                 <th class="text-center" style="width: 10%;">
                     <a href="{{ route('stock_mutations.index', array_merge(request()->all(), ['sort_by' => 'stock_before', 'direction' => ($sortBy == 'stock_before' && $direction == 'asc') ? 'desc' : 'asc'])) }}" style="color: inherit; text-decoration: none;">
                         Sebelum 
@@ -52,7 +48,6 @@
                     </a>
                 </th>
 
-                <!-- Sorting Stok Sesudah -->
                 <th class="text-center" style="width: 10%;">
                     <a href="{{ route('stock_mutations.index', array_merge(request()->all(), ['sort_by' => 'stock_after', 'direction' => ($sortBy == 'stock_after' && $direction == 'asc') ? 'desc' : 'asc'])) }}" style="color: inherit; text-decoration: none;">
                         Sesudah 
@@ -90,7 +85,6 @@
                 <td class="text-center"><strong class="text-navy">{{ $mutation->stock_after }}</strong></td>
                 <td class="text-center">
                     @if($mutation->photo)
-                        <!-- Menggunakan onclick untuk membuka modal alih-alih membuka tab baru -->
                         <a href="javascript:void(0);" onclick="showImageModal('{{ asset('uploads/products/mutasi/' . $mutation->photo) }}')" title="Klik untuk pratinjau">
                             <img src="{{ asset('uploads/products/mutasi/' . $mutation->photo) }}" alt="Bukti Mutasi" class="img-thumbnail" style="width: 45px; height: 45px; object-fit: cover; border-radius: 4px;">
                         </a>
@@ -105,9 +99,6 @@
                     <button type="button" class="btn btn-info btn-xs" onclick="showDetailMutation('{{ route('stock_mutations.show', $mutation->id) }}')" title="Lihat Detail">
                         <i class="fa fa-eye"></i>
                     </button>
-                    
-                    <!-- Tombol Hapus yang sudah ada sebelumnya -->
-                    ...
                 </td>
             </tr>
             @empty

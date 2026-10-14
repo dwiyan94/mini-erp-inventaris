@@ -15,7 +15,6 @@ class HRDatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Buat 10 Role (Spatie)
         $roleNames = [
             'Super Admin', 'HR Manager', 'HR Staff', 'Finance Manager', 
             'Finance Staff', 'IT Manager', 'Software Engineer', 'Operations Manager', 
@@ -53,7 +52,6 @@ class HRDatabaseSeeder extends Seeder
             }
         }
 
-        // 4. Buat 100 Pekerja (Employee) & 100 User yang terikat
         for ($i = 1; $i <= 500; $i++) {
             $nik = 'EMP' . str_pad($i, 4, '0', STR_PAD_LEFT);
             $name = fake()->name();

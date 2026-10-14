@@ -16,22 +16,17 @@
             "hideMethod": "fadeOut"
         }
 
-        // 1. Notifikasi Sukses
         @if(session('success'))
             toastr.success('{{ session('success') }}', 'Berhasil!');
         @endif
 
-        // 2. Notifikasi Error Umum (Session Error)
         @if(session('error'))
             toastr.error('{{ session('error') }}', 'Gagal!');
         @endif
 
-        // 3. Notifikasi Error Validasi Laravel & Otomatis Buka Modal Kembali
         @if($errors->any())
             toastr.error('Terjadi kesalahan. Periksa kembali input data Anda.', 'Validasi Gagal!');
             
-            // Otomatis membuka kembali modal jika terjadi error validasi saat Store / Update
-            // (Ganti #userModal dengan ID modal yang sesuai, misal #positionModal atau #departmentModal)
             $('#userModal').modal('show');
         @endif
     });
@@ -91,7 +86,6 @@
     }
 
     $(document).ready(function() {
-        // 1. Inisialisasi plugin Chosen dengan lebar 100%
         $('.chosen-select').chosen({
             width: "100%",
             no_results_text: "Data tidak ditemukan: ",
@@ -110,11 +104,11 @@
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
             passwordIcon.classList.remove('fa-eye');
-            passwordIcon.classList.add('fa-eye-slash'); // Ubah ikon menjadi mata tertutup/dicoret
+            passwordIcon.classList.add('fa-eye-slash'); 
         } else {
             passwordInput.type = 'password';
             passwordIcon.classList.remove('fa-eye-slash');
-            passwordIcon.classList.add('fa-eye'); // Ubah kembali ikon menjadi mata terbuka
+            passwordIcon.classList.add('fa-eye'); 
         }
     }
 

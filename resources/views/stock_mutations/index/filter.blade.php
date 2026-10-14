@@ -9,10 +9,8 @@
             </div>
         </form>
 
-        <!-- Form Filter Tanggal & Pencarian -->
         <form method="GET" action="{{ route('stock_mutations.index') }}" class="form-inline m-b-md" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
             
-            <!-- Pertahankan parameter pencarian jika ada -->
             @if(request('search'))
                 <input type="hidden" name="search" value="{{ request('search') }}">
             @endif

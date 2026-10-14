@@ -7,13 +7,11 @@
         $('#methodField').html('');
         $('#stockGroup').show();
         $('#stock').prop('required', true);
-        // Sembunyikan pratinjau foto saat tambah baru
         $('#photoPreviewContainer').hide();
         $('#previewPhoto').attr('src', '');
         $('#productModal').modal('show');
     }
 
-    // URUTAN PARAMETER HARUS KONSISTEN
     function openEditModal(id, sku, name, category, unit, price, stock, photo) {
         $('#modalTitle').text('Edit Produk');
         $('#modalSubmitBtn').text('Perbarui');
@@ -33,7 +31,6 @@
         $('#stockGroup').hide();
         $('#stock').prop('required', false);
 
-        // Tampilkan pratinjau foto jika ada
         if (photo && photo !== 'null' && photo !== '' && photo !== 'undefined') {
             let photoUrl = '{{ asset("uploads/products/items") }}/' + photo;
             $('#previewPhoto').attr('src', photoUrl);
@@ -74,7 +71,7 @@
             if (!rawPrice || parseInt(rawPrice) <= 0) {
                 alert('Harga produk harus lebih dari 0!');
                 $('#price').focus();
-                e.preventDefault(); // Batalkan pengiriman form
+                e.preventDefault(); 
                 return false;
             }
             
@@ -125,87 +122,41 @@
         });
     }
 
-    // Konfirmasi untuk Muat Data Demo dengan SweetAlert
-        function confirmImportDemo(event, element) {
-            event.preventDefault(); // Mencegah langsung pindah halaman
-            
-            swal({
-                title: "Muat Data Demo?",
-                text: "Sistem akan mengambil data produk demo terbaru dari server.",
-                type: "info",
-                showCancelButton: true,
-                confirmButtonColor: "#1ab394", // Warna hijau khas Inspinia
-                confirmButtonText: "Ya, Muat Data!",
-                cancelButtonText: "Batal",
-                closeOnConfirm: false
-            }, function (isConfirm) {
-                if (isConfirm) {
-                    // Arahkan ke URL import demo
-                    window.location.href = element.href;
-                }
-            });
-        }
+    function confirmImportDemo(event, element) {
+        event.preventDefault();
+        
+        swal({
+            title: "Muat Data Demo?",
+            text: "Sistem akan mengambil data produk demo terbaru dari server.",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#1ab394",
+            confirmButtonText: "Ya, Muat Data!",
+            cancelButtonText: "Batal",
+            closeOnConfirm: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                window.location.href = element.href;
+            }
+        });
+    }
 
-        // Konfirmasi untuk Reset Data dengan SweetAlert
-        function confirmResetDemo(event, element) {
-            event.preventDefault(); // Mencegah langsung pindah halaman
+    function confirmResetDemo(event, element) {
+        event.preventDefault();
 
-            swal({
-                title: "Apakah Anda yakin mereset data?",
-                text: "Semua data produk dan riwayat mutasi stok akan dikosongkan secara total!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55", // Warna merah peringatan
-                confirmButtonText: "Ya, Reset Total!",
-                cancelButtonText: "Batal",
-                closeOnConfirm: false
-            }, function (isConfirm) {
-                if (isConfirm) {
-                    // Arahkan ke URL reset demo
-                    window.location.href = element.href;
-                }
-            });
-        }
-
-    // function showImportToast(event, element) {
-    //         event.preventDefault(); // Mencegah pindah halaman langsung sebentar untuk menampilkan toast
-            
-    //         // Konfigurasi Toastr
-    //         toastr.options = {
-    //             "closeButton": true,
-    //             "progressBar": true,
-    //             "positionClass": "toast-top-right",
-    //             "timeOut": "3000"
-    //         };
-            
-    //         toastr.info('Sedang mengambil data demo dari server, mohon tunggu...', 'Memproses Data');
-
-    //         // Beri jeda sedikit agar toast sempat tampil sebelum berpindah halaman
-    //         setTimeout(function() {
-    //             window.location.href = element.href;
-    //         }, 1000);
-    //     }
-
-    //     function showResetToast(event, element) {
-    //         event.preventDefault();
-
-    //         // Konfirmasi konvensional atau langsung toast peringatan
-    //         if (confirm('Apakah Anda yakin ingin mereset seluruh data produk dan mutasi?')) {
-    //             toastr.options = {
-
-    //                 "showCancelButton": true,
-    //                 "confirmButtonColor": "#DD6B55",
-    //                 "confirmButtonText": "Ya, hapus!",
-    //                 "cancelButtonText": "Batal",
-    //                 "closeOnConfirm": false,
-    //                 "closeOnCancel": false
-    //             };
-                
-    //             toastr.warning('Sedang membersihkan database...', 'Mereset Data');
-
-    //             setTimeout(function() {
-    //                 window.location.href = element.href;
-    //             }, 1000);
-    //         }
-    //     }
+        swal({
+            title: "Apakah Anda yakin mereset data?",
+            text: "Semua data produk dan riwayat mutasi stok akan dikosongkan secara total!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55", 
+            confirmButtonText: "Ya, Reset Total!",
+            cancelButtonText: "Batal",
+            closeOnConfirm: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                window.location.href = element.href;
+            }
+        });
+    }
 </script>

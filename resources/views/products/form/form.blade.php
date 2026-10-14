@@ -37,7 +37,6 @@
                         <label class="col-sm-3 control-label">Harga (Rp)</label>
                         <div class="col-sm-9">
                             
-                            <!-- Ubah type="number" menjadi type="text" agar bisa menampilkan titik pemisah -->
                             <input type="text" 
                                    name="price" 
                                    id="price" 

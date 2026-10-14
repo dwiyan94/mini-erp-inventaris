@@ -8,7 +8,6 @@
 
                 <th>Kategori</th>
 
-                <!-- Link Sorting Harga -->
                 <th class="text-right">
                     <a href="{{ route('products.index', array_merge(request()->all(), ['sort_by' => 'price', 'direction' => ($sortBy == 'price' && $direction == 'asc') ? 'desc' : 'asc'])) }}" style="color: inherit; text-decoration: none;">
                         Harga (Rp) 
@@ -20,7 +19,6 @@
                     </a>
                 </th>
 
-                <!-- Link Sorting Stok -->
                 <th class="text-center">
                     <a href="{{ route('products.index', array_merge(request()->all(), ['sort_by' => 'stock', 'direction' => ($sortBy == 'stock' && $direction == 'asc') ? 'desc' : 'asc'])) }}" style="color: inherit; text-decoration: none;">
                         Stok 

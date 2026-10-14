@@ -5,14 +5,11 @@
     }
 
     function showImageModal(imageUrl) {
-        // Masukkan URL gambar ke dalam elemen img di dalam modal
         $('#modalImagePreview').attr('src', imageUrl);
-        // Tampilkan modal
         $('#imagePreviewModal').modal('show');
     }
 
     function showDetailMutation(url) {
-        // Kosongkan / set loading state jika perlu
         $.ajax({
             url: url,
             type: 'GET',
@@ -61,7 +58,6 @@
     }
 
     $(document).ready(function() {
-            // Inisialisasi chosen-select
             $('.chosen-select').chosen({
                 width: "100%",
                 no_results_text: "Produk tidak ditemukan: "

@@ -102,19 +102,17 @@ class ProductController extends Controller
         }
 
         if ($request->hasFile('photo')) {
-            // Hapus foto lama jika ada
+
             if ($product->photo && file_exists(public_path('uploads/products/items/' . $product->photo))) {
                 @unlink(public_path('uploads/products/items/' . $product->photo));
             }
 
             $file = $request->file('photo');
             
-            // Buat nama baru berdasarkan nama produk yang diperbarui
             $slugName = \Illuminate\Support\Str::slug($request->name);
             $extension = $file->getClientOriginalExtension();
             $filename = $slugName . '_' . time() . '.' . $extension;
 
-            // Pastikan folder tujuan ada
             $destinationPath = public_path('uploads/products/items/');
             if (!file_exists($destinationPath)) {
                 mkdir($destinationPath, 0755, true);
@@ -124,17 +122,15 @@ class ProductController extends Controller
             $data['photo'] = $filename;
         }
 
-        // Perbarui data produk ke database
         $product->update($data);
 
         return redirect()->route('products.index')->with('success', 'Data produk berhasil diperbarui.');
     }
 
-    // Menghapus produk (Soft Delete)
     public function destroy(Product $product)
     {
         if ($product->photo) {
-            // Perbaikan: tambahkan '/' sebelum $product->photo agar path foldernya benar
+
             $oldPath = public_path('uploads/products/items/' . $product->photo);
             $deletedDir = public_path('uploads/products/items/deleted');
 
