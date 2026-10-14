@@ -53,22 +53,16 @@ Route::middleware(['auth', 'permission:view-employees'])->group(function () {
     Route::resource('employees', EmployeeController::class);
 });
 
-Route::middleware(['auth', \App\Http\Middleware\CheckSingleSession::class])->group(function () {
+Route::middleware(['permission:view-stock_mutations'])->group(function () {
+    Route::resource('stock_mutations', StockMutationController::class)->only(['index', 'store']);
 
+    Route::get('/stock-mutations/{id}', [StockMutationController::class, 'show'])->name('stock_mutations.show');
+});
+
+Route::middleware(['auth', \App\Http\Middleware\CheckSingleSession::class, 'permission:view-products'])->group(function () {
     Route::get('/products/import-demo', [ProductController::class, 'importDemo'])->name('products.import-demo');
-        Route::get('/products/reset-demo', [ProductController::class, 'resetDemo'])->name('products.reset-demo');
-    
-    Route::middleware(['permission:view-products'])->group(function () {
-        Route::resource('products', ProductController::class)->except(['create', 'edit']);
-    });
+    Route::get('/products/reset-demo', [ProductController::class, 'resetDemo'])->name('products.reset-demo');
 
-    Route::middleware(['permission:view-stock_mutations'])->group(function () {
-        Route::resource('stock_mutations', StockMutationController::class)->only(['index', 'store']);
-
-        Route::get('/stock-mutations/{id}', [StockMutationController::class, 'show'])->name('stock_mutations.show');
-    });
-
-
-
+    Route::resource('products', ProductController::class)->except(['create', 'edit']);
 });
 

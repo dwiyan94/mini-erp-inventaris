@@ -27,6 +27,8 @@ class RoleAndPermissionSeeder extends Seeder
             'view-products', 'create-products', 'edit-products', 'delete-products',
 
             'view-stock_mutations', 'create-stock_mutations', 'edit-stock_mutations', 'delete-stock_mutations',
+
+            'reset-demo', 'import-demo',
         ];
 
         foreach ($permissions as $permission) {
@@ -45,11 +47,31 @@ class RoleAndPermissionSeeder extends Seeder
             'view-users', 'create-users', 'edit-users',
         ]);
 
-        $hrRole = Role::firstOrCreate(['name' => 'gudang']);
-        $hrRole->givePermissionTo([
+        $gudangRole = Role::firstOrCreate(['name' => 'gudang']);
+        $gudangRole->givePermissionTo([
             'view-products', 'create-products', 'edit-products',
 
-            'view-stock_mutations', 'create-stock_mutations', 'edit-stock_mutations'
+            'view-stock_mutations', 'create-stock_mutations'
+        ]);
+
+        $ownerRole = Role::firstOrCreate(['name' => 'owner']);
+        $ownerRole->givePermissionTo(Permission::all());
+
+        $managerRole = Role::firstOrCreate(['name' => 'manager']);
+        $managerRole->givePermissionTo([
+            'view-departments', 'create-departments', 'edit-departments',
+            
+            'view-positions', 'create-positions', 'edit-positions',
+            
+            'view-employees', 'create-employees', 'edit-employees',
+            
+            'view-users', 'create-users', 'edit-users',
+            
+            'view-roles', 'create-roles', 'edit-roles',
+
+            'view-products', 'create-products', 'edit-products', 
+
+            'view-stock_mutations', 'create-stock_mutations', 'edit-stock_mutations',
         ]);
     }
 }

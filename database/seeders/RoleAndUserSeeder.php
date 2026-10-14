@@ -23,7 +23,7 @@ class RoleAndUserSeeder extends Seeder
         $admin = User::create([
             'name' => 'SuperAdmin',
             'email' => 'admin@syailendra.com',
-            'password' => Hash::make('asdasd123'),
+            'password' => Hash::make('password123'),
         ]);
         $admin->assignRole(['admin', 'owner']);
 

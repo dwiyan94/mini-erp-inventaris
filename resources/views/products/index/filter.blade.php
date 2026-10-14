@@ -1,15 +1,18 @@
 <div class="row m-b-md">
     <div class="col-sm-12">
         <div class="col-sm-6">
-            <!-- Tombol Muat Data Demo -->
+            @canany(['import-demo', 'reset-demo'])
+
             <a href="{{ route('products.import-demo') }}" class="btn btn-primary btn-sm" onclick="confirmImportDemo(event, this)">
                 <i class="fa fa-download"></i> Muat Data Demo
             </a>
 
-            <!-- Tombol Reset Data -->
             <a href="{{ route('products.reset-demo') }}" class="btn btn-danger btn-sm" onclick="confirmResetDemo(event, this)">
                 <i class="fa fa-refresh"></i> Reset Data
             </a>
+
+            @endcanany
+
         </div>
         <form action="{{ route('products.index') }}" method="GET" class="form-inline pull-right">
             <div class="input-group">

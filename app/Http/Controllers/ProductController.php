@@ -14,6 +14,10 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
+        if (!auth()->user()->can('view-products')) {
+            abort(403, 'Anda tidak memiliki hak akses ke halaman produk.');
+        }
+
         $search = $request->input('search');
         $sortBy = $request->input('sort_by', 'updated_at');
         
@@ -140,7 +144,6 @@ class ProductController extends Controller
 
             $newPath = $deletedDir . '/' . $product->photo;
 
-            // Pastikan file fisiknya benar-benar ada sebelum dipindah
             if (file_exists($oldPath)) {
                 rename($oldPath, $newPath);
             }
@@ -175,7 +178,10 @@ class ProductController extends Controller
 
     public function importDemo()
     {
-        // Tambahkan ->withoutVerifying() untuk mengabaikan pengecekan SSL di server lokal
+        if (!auth()->user()->can('view-users')) {
+            abort(403, 'Anda tidak memiliki hak akses ke halaman ini.');
+        }
+
         $response = Http::withoutVerifying()->get('https://dummyjson.com/products');
 
         if ($response->successful()) {
@@ -207,6 +213,10 @@ class ProductController extends Controller
 
     public function resetDemo()
     {
+        if (!auth()->user()->can('view-users')) {
+            abort(403, 'Anda tidak memiliki hak akses ke halaman ini.');
+        }
+        
         DB::statement('TRUNCATE TABLE products RESTART IDENTITY CASCADE;');
 
         return redirect()->route('products.index')->with('success', 'Data produk dan riwayat mutasi berhasil di-reset total.');

@@ -13,7 +13,8 @@
     </div>
     <div class="col-lg-2">
         <div class="title-action">
-            <button type="button" class="btn btn-primary" onclick="openMutationModal()">
+            <button type="button" class="btn btn-primary {{ $products->isEmpty() ? 'btn-outline' : '' }}" 
+                    onclick="{{ $products->isEmpty() ? 'showNoProductWarning()' : 'openMutationModal()' }}">
                 <i class="fa fa-exchange"></i> Catat Mutasi Stok
             </button>
         </div>

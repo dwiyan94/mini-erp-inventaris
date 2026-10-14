@@ -48,7 +48,9 @@ class StockMutationController extends Controller
                 'direction' => $direction,
             ]);
 
-        return view('stock_mutations.index.index', compact('mutations', 'search', 'sortBy', 'direction'));
+        $products = Product::all();
+
+        return view('stock_mutations.index.index', compact('products','mutations', 'search', 'sortBy', 'direction'));
     }
 
     public function store(Request $request)
@@ -161,6 +163,10 @@ class StockMutationController extends Controller
     
     public function destroy($id)
     {
+        if (!auth()->user()->can('delete-employess')) {
+            abort(403, 'Anda tidak memiliki hak akses.');
+        }
+        
         DB::beginTransaction();
         try {
             $mutation = StockMutation::findOrFail($id);
