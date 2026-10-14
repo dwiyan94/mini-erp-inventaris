@@ -7,7 +7,7 @@ Aplikasi simulasi manajemen inventaris berbasis web yang dirancang untuk mengelo
 ## 👨‍💻 Informasi Pengembang
 * **Nama Kandidat**: Dwiyan Primastia Saputra
 * **Program Studi**: S1 Teknik Informatika, Universitas Amikom Yogyakarta
-* **Waktu Pengerjaan**: Oktober 2026
+* **Waktu Pengerjaan**: 15 Oktober 2026
 
 ---
 
@@ -65,17 +65,19 @@ Sistem dilengkapi dengan akun simulasi bawaan untuk pengujian hak akses:
 
 3. Instalasi Dependensi & Migrasi:
    Jalankan perintah berikut melalui terminal di root direktori proyek:
+   ```env
    composer install
    php artisan key:generate
    php artisan migrate --seed
 
 4. Menjalankan Server Lokal:
-
+   ```env
    php artisan serve
 
    Akses aplikasi via browser di: http://127.0.0.1:8000
 5. Menjalankan Unit Test:
    Untuk memverifikasi keunikan SKU, batas stok keluar, dan perhitungan valuasi inventaris secara otomatis:
+   ```env
    php artisan test
 
 ---
