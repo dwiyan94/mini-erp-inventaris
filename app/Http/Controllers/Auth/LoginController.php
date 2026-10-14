@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class LoginController extends Controller
+{
+    // Menampilkan halaman login
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+    
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
+            $request->session()->regenerate();
+
+            // BUAT TOKEN SESI UNIK
+            $sessionId = uniqid('', true);
+            
+            // SIMPAN KE DATABASE & SESSION
+            $user = Auth::user();
+            $user->current_session_id = $sessionId;
+            $user->save();
+
+            session(['user_session_id' => $sessionId]);
+
+            return redirect()->intended('/dashboard')->with('success', 'Berhasil masuk ke sistem.');
+        }
+
+        return back()->withErrors([
+            'email' => 'Email atau password yang Anda masukkan salah.',
+        ]);
+    }
+
+    // Proses Logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
+    }
+}
