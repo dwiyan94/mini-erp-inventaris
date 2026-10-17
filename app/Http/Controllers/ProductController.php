@@ -216,6 +216,10 @@ class ProductController extends Controller
         if (!auth()->user()->can('view-users')) {
             abort(403, 'Anda tidak memiliki hak akses ke halaman ini.');
         }
+
+        // Menggunakan Eloquent truncate yang aman untuk semua jenis database
+        \App\Models\Product::truncate();
+        
         
         DB::statement('TRUNCATE TABLE products RESTART IDENTITY CASCADE;');
 
