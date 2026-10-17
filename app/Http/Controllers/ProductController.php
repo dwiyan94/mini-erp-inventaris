@@ -217,11 +217,16 @@ class ProductController extends Controller
             abort(403, 'Anda tidak memiliki hak akses ke halaman ini.');
         }
 
-        // Menggunakan Eloquent truncate yang aman untuk semua jenis database
+        // Menonaktifkan sementara pengecekan relasi foreign key
+        \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
+
+        // Kosongkan tabel produk dan tabel relasinya (misal: mutasi)
         \App\Models\Product::truncate();
-        
-        
-        DB::statement('TRUNCATE TABLE products RESTART IDENTITY CASCADE;');
+        // Jika ada tabel mutasi yaml_emit(data)ng ikut dikosongkan:
+        // \App\Models\ProductMutation::truncate(); 
+
+        // Mengaktifkan kembali pengecekan relasi
+        \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
 
         return redirect()->route('products.index')->with('success', 'Data produk dan riwayat mutasi berhasil di-reset total.');
     }
