@@ -9,14 +9,17 @@
         $('#imagePreviewModal').modal('show');
     }
 
-    function showDetailMutation(url) {
+    // Ubah parameter dari 'url' menjadi 'id'
+    function showDetailMutation(id) {
         $.ajax({
-            url: url,
+            url: '/stock-mutations/' + id, // Rangkai path relatif di sini
             type: 'GET',
             dataType: 'json',
             success: function(response) {
+                // ... (kode Anda di bawahnya tetap sama)
                 if(response.success) {
                     let d = response.data;
+                    // ...
                     
                     // Isi data ke elemen modal
                     $('#det-created-at').text(d.created_at);

@@ -96,9 +96,12 @@
                 <td>{{ $mutation->user->name ?? 'System' }}</td>
                 <td class="text-center">
                     <!-- Tombol Detail -->
-                    <button type="button" class="btn btn-info btn-xs" onclick="showDetailMutation('{{ route('stock_mutations.show', $mutation->id) }}')" title="Lihat Detail">
+                    {{-- <button type="button" class="btn btn-info btn-xs" onclick="showDetailMutation('{{ route('stock_mutations.show', $mutation->id) }}')" title="Lihat Detail">
                         <i class="fa fa-eye"></i>
-                    </button>
+                    </button> --}}
+                    <a href="javascript:void(0);" onclick="showDetailMutation('/stock-mutations/{{ $item->id }}')">
+                        <i class="fa fa-eye"></i>
+                    </a>
                 </td>
             </tr>
             @empty
