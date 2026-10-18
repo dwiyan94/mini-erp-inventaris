@@ -22,18 +22,6 @@
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissable">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            {{ session('success') }}
-        </div>
-    @endif
-    @if(session('error'))
-        <div class="alert alert-danger alert-dismissable">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            {{ session('error') }}
-        </div>
-    @endif
 
     <div class="row">
         <div class="col-lg-4">
@@ -227,6 +215,25 @@
 
 @section('scripts')
 <script>
+    // Konfigurasi umum Toastr Inspinia
+    toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "timeOut": "5000"
+    };
+
+    // Trigger Toastr jika ada session success
+    @if(session('success'))
+        toastr.success("{{ session('success') }}", "Berhasil!");
+    @endif
+
+    // Trigger Toastr jika ada session error
+    @if(session('error'))
+        toastr.error("{{ session('error') }}", "Gagal!");
+    @endif
+
+    
     function openMutationModal(type) {
         $('#mutationTypeInput').val(type);
         
