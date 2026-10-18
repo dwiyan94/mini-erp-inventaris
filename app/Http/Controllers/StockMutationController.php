@@ -82,9 +82,7 @@ class StockMutationController extends Controller
             if ($request->type === 'in') {
                 $stockAfter = $stockBefore + $request->quantity;
             } else {
-                if ($stockBefore < $request->quantity) {
-                    return back()->withErrors(['quantity' => 'Stok barang tidak mencukupi untuk pengeluaran ini.'])->withInput();
-                }
+                
 
                 $stockAfter = $stockBefore - $request->quantity;
             }
