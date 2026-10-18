@@ -220,7 +220,7 @@ class ProductController extends Controller
         \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
 
         \App\Models\Product::truncate();
-        \App\Models\ProductMutation::truncate(); 
+        \App\Models\StockMutation::truncate(); 
 
         \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
 
