@@ -99,7 +99,7 @@
                     {{-- <button type="button" class="btn btn-info btn-xs" onclick="showDetailMutation('{{ route('stock_mutations.show', $mutation->id) }}')" title="Lihat Detail">
                         <i class="fa fa-eye"></i>
                     </button> --}}
-                    <button type="button" class="btn btn-info btn-xs" onclick="showDetailMutation('/stock-mutations/{{ $mutation->id }}')">
+                    <button type="button" class="btn btn-info btn-xs" onclick="showDetailMutation('{{ $mutation->id }}')">
                         <i class="fa fa-eye"></i>
                     </button>
                 </td>
