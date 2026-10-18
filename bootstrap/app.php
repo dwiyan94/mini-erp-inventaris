@@ -21,13 +21,13 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             \App\Http\Middleware\CheckSingleSession::class,
         ]);
+
+        // Percayai semua proxy (seperti Railway, Cloudflare, dll)
+        // Letakkan di dalam blok withMiddleware yang sudah ada
+        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
     })->create();
-    ->withMiddleware(function (Middleware $middleware) {
-        // Percayai semua proxy (seperti Railway, Cloudflare, dll)
-        $middleware->trustProxies(at: '*');
-    })
