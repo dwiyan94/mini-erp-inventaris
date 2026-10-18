@@ -58,7 +58,7 @@ class StockMutationController extends Controller
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'type' => 'required|in:in,out',
-            'quantity' => 'required|integer|min:1', // Menolak angka 0, negatif, dan desimal
+            'quantity' => 'required|integer|min:1',
             'notes' => 'nullable|string',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ], [
@@ -66,48 +66,76 @@ class StockMutationController extends Controller
             'quantity.integer' => 'Jumlah (Qty) harus berupa bilangan bulat (tanpa desimal).',
             'quantity.min' => 'Jumlah (Qty) minimal adalah 1 (tidak boleh nol atau negatif).',
         ]);
-
+    
         DB::beginTransaction();
+    
         try {
-            $product = Product::lockForUpdate()->findOrFail($request->product_id);
-
-            if ($request->type === 'out' && $request->quantity > $product->stock) {
-                return redirect()->back()
+            $product = Product::lockForUpdate()
+                ->findOrFail($request->product_id);
+    
+            // ==========================================
+            // VALIDASI STOK KELUAR
+            // ==========================================
+            if (
+                $request->type === 'out' &&
+                $request->quantity > $product->stock
+            ) {
+                DB::rollBack();
+    
+                return back()
                     ->withInput()
-                    ->with('error', 'Gagal! Jumlah stok keluar (' . $request->quantity . ') melebihi sisa stok saat ini (' . $product->stock . ').');
+                    ->with(
+                        'error',
+                        'Gagal! Jumlah stok keluar (' .
+                        $request->quantity .
+                        ') melebihi sisa stok saat ini (' .
+                        $product->stock .
+                        ').'
+                    );
             }
-
+    
+            // ==========================================
+            // HITUNG STOK
+            // ==========================================
             $stockBefore = $product->stock;
-
+    
             if ($request->type === 'in') {
                 $stockAfter = $stockBefore + $request->quantity;
             } else {
-                
-
                 $stockAfter = $stockBefore - $request->quantity;
             }
-
+    
+            // ==========================================
+            // UPLOAD FOTO
+            // ==========================================
             $photoPath = null;
+    
             if ($request->hasFile('photo')) {
                 $file = $request->file('photo');
-                
+    
                 $slugName = \Illuminate\Support\Str::slug($product->name);
                 $dateFormatted = date('Y-m-d_H-i-s');
                 $extension = $file->getClientOriginalExtension();
-                
-                $filename = '[MUT]_' . $slugName . '_' . $dateFormatted . '.' . $extension;
-                
+    
+                $filename = '[MUT]_' .
+                    $slugName . '_' .
+                    $dateFormatted . '.' .
+                    $extension;
+    
                 $destinationPath = public_path('uploads/products/mutasi');
-                
+    
                 if (!file_exists($destinationPath)) {
                     mkdir($destinationPath, 0755, true);
                 }
-                
+    
                 $file->move($destinationPath, $filename);
-                
-                $photoPath = $filename; 
+    
+                $photoPath = $filename;
             }
-
+    
+            // ==========================================
+            // SIMPAN MUTASI
+            // ==========================================
             StockMutation::create([
                 'product_id' => $product->id,
                 'user_id' => auth()->id(),
@@ -118,16 +146,31 @@ class StockMutationController extends Controller
                 'notes' => $request->notes,
                 'photo' => $photoPath,
             ]);
-
-            // Update stok terbaru di tabel products
-            $product->update(['stock' => $stockAfter]);
-
+    
+            // ==========================================
+            // UPDATE STOK PRODUK
+            // ==========================================
+            $product->update([
+                'stock' => $stockAfter,
+            ]);
+    
             DB::commit();
-
-            return redirect()->back()->with('success', 'Transaksi mutasi stok berhasil dicatat.');
+    
+            return back()->with(
+                'success',
+                'Transaksi mutasi stok berhasil dicatat.'
+            );
+    
         } catch (\Exception $e) {
+    
             DB::rollBack();
-            return back()->with('error', 'Terjadi kesalahan sistem: ' . $e->getMessage())->withInput();
+    
+            return back()
+                ->withInput()
+                ->with(
+                    'error',
+                    'Terjadi kesalahan sistem: ' . $e->getMessage()
+                );
         }
     }
 
