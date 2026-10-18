@@ -43,8 +43,7 @@ class InventoryBusinessLogicTest extends TestCase
     {
         $user = User::factory()->create();
 
-        //$permission = \Spatie\Permission\Models\Permission::firstOrCreate(['name' => 'view-stock_mutations']);
-        $permission = \Spatie\Permission\Models\Permission::firstOrCreate(['name' => 'create-stock_mutations']);
+        $permission = \Spatie\Permission\Models\Permission::firstOrCreate(['name' => 'view-stock_mutations']);
         $user->givePermissionTo($permission);
 
         $product = Product::create([
@@ -64,9 +63,7 @@ class InventoryBusinessLogicTest extends TestCase
             'notes' => 'Pengeluaran melebihi stok',
         ]);
 
-        $response->dumpSession(); 
-        $response->dump();
-
+        $response->dumpSession();
         $response->assertSessionHas('error');
         $this->assertEquals(5, $product->fresh()->stock);
     }
