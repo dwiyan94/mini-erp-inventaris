@@ -100,6 +100,60 @@
 
     <script src="{{ asset('inspinia/js/plugins/chosen/chosen.jquery.js') }}"></script>
 
+    <script type="text/javascript">
+        
+        $(document).ready(function() {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "progressBar": true,
+                "preventDuplicates": false,
+                "positionClass": "toast-top-right",
+                "showDuration": "400",
+                "hideDuration": "1000",
+                "timeOut": "4000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
+            @if(session('success'))
+                toastr.success('{{ session('success') }}', 'Berhasil!');
+            @endif
+
+            @if(session('error'))
+                toastr.error('{{ session('error') }}', 'Gagal!');
+            @endif
+
+            @if($errors->any())
+                toastr.error('Terjadi kesalahan. Periksa kembali input data Anda.', 'Validasi Gagal!');
+            @endif
+        });
+
+        function confirmDelete(id) {
+            swal({
+                title: "Apakah Anda yakin?",
+                text: "Data departemen yang dihapus akan masuk ke sampah !",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    document.getElementById('delete-form-' + id).submit();
+                    swal("Terhapus!", "Data yang anda pilih telah terhapus.", "success");
+                } else {
+                    swal("Batal", "Data yang akan dihapus dibatalkan :)", "error");
+                }            
+            });
+        }
+    </script>
+
     @stack('scripts')
 
     @yield('scripts')

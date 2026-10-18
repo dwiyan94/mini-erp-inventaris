@@ -12,8 +12,25 @@
                     
                      </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ auth()->user()->name }}</strong>
-                     </span> <span class="text-muted text-xs block">{{ strtoupper(auth()->user()->getRoleNames()->implode(', ')) }} <b class="caret"></b></span> </span> </a>
+                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ auth()->user()->employee->name ?? auth()->user()->name }}</strong>
+                     </span> <span class="text-muted text-xs block"> 
+                        @if(auth()->user()->hasRole('admin'))
+                            SUPERADMIN
+                        @else
+                            {{ strtoupper(auth()->user()->getRoleNames()->first()) }}
+                        @endif
+
+                        {{-- @php
+                            $roles = auth()->user()->getRoleNames();
+                        @endphp
+
+                        @if($roles->count() > 1)
+                            {{ strtoupper($roles->first()) }} <span class="badge badge-primary">+{{ $roles->count() - 1 }}</span>
+                        @else
+                            {{ strtoupper($roles->first() ?? 'GUEST') }}
+                        @endif --}}
+                        
+                        <b class="caret"></b></span> </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a href="{{ route('users.profile') }}">Profile</a></li>
                         <li><a href="contacts.html">Contacts</a></li>

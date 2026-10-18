@@ -13,8 +13,8 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Departemen</label>
                         <div class="col-sm-9">
-                            <select name="department_id" id="departmentId" class="form-control" required>
-                                <option value="">-- Pilih Departemen --</option>
+                            <select name="department_id" id="departmentId" class="chosen-select form-control" required data-placeholder="-- Pilih Departemen --">
+                                <option value=""></option>
                                 @foreach($departments as $dept)
                                     <option value="{{ $dept->id }}">{{ $dept->name }}</option>
                                 @endforeach
@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Nama Posisi</label>
                         <div class="col-sm-9">
-                            <input type="text" name="name" id="positionName" class="form-control" placeholder="Contoh: Senior Software Engineer" required>
+                            <input type="text" name="name" id="positionName" class="chosen-select form-control" placeholder="Contoh: Senior Software Engineer" required>
                         </div>
                     </div>
 

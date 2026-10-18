@@ -1,8 +1,8 @@
 <div class="table-responsive">
-    <table class="table table-bordered table-hover">
+    <table class="table table-stripped table-hover">
         <thead>
             <tr>
-                <th width="5%" class="text-center">No</th>
+                <th>No</th>
                 <th width="10%" class="text-center">Foto</th>
                 <th>ID</th>
                 <th>Nama Lengkap</th>
@@ -32,13 +32,13 @@
 
                 </td>
                 
-                @canany(['edit-employess', 'delete-employess'])
+                @canany(['edit-employees', 'delete-employees'])
                 <td class="text-center">
                     <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-warning btn-xs">
                         <i class="fa fa-pencil"></i> Edit
                     </a>
 
-                    @can('delete-employess')
+                    @can('delete-employees')
                     <form id="delete-form-{{ $employee->id }}" action="{{ route('employees.destroy', $employee->id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE') 

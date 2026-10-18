@@ -27,7 +27,6 @@
                     <h5>{{ isset($employee) ? 'Formulir Perubahan Data Pekerja' : 'Formulir Input Data Pekerja' }}</h5>
                 </div>
                 <div class="ibox-content">
-                    <!-- Form Action & Method dinamis berdasarkan status Create / Edit -->
                     <form action="{{ isset($employee) ? route('employees.update', $employee->id) : route('employees.store') }}" 
                           method="POST" 
                           enctype="multipart/form-data" 
@@ -78,8 +77,8 @@
                         <div class="form-group @error('position_id') has-error @enderror">
                             <label class="col-sm-2 control-label">Posisi</label>
                             <div class="col-sm-4">
-                                <select name="position_id" class="form-control" required>
-                                    <option value="">-- Pilih Posisi / Jabatan --</option>
+                                <select name="position_id" class="chosen-select form-control" required data-placeholder="-- Pilih Posisi / Jabatan --">
+                                    <option value=""></option>
                                     @foreach($positions as $pos)
                                         <option value="{{ $pos->id }}" {{ old('position_id', $employee->position_id ?? '') == $pos->id ? 'selected' : '' }}>
                                             {{ $pos->department->name ?? '-' }} &raquo; {{ $pos->name }}
@@ -140,3 +139,16 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        // Inisialisasi Plugin Chosen untuk Halaman Penuh
+        $('.chosen-select').chosen({
+            width: "100%",
+            no_results_text: "Data tidak ditemukan: ",
+            allow_single_deselect: true
+        });
+    });
+</script>
+@endpush

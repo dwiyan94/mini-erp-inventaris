@@ -1,56 +1,10 @@
 <script>
     $(document).ready(function() {
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "progressBar": true,
-            "preventDuplicates": false,
-            "positionClass": "toast-top-right",
-            "showDuration": "400",
-            "hideDuration": "1000",
-            "timeOut": "4000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
-
-        @if(session('success'))
-            toastr.success('{{ session('success') }}', 'Berhasil!');
-        @endif
-
-        @if(session('error'))
-            toastr.error('{{ session('error') }}', 'Gagal!');
-        @endif
-
+        // Hanya buka userModal jika ada error di halaman User
         @if($errors->any())
-            toastr.error('Terjadi kesalahan. Periksa kembali input data Anda.', 'Validasi Gagal!');
-            
             $('#userModal').modal('show');
         @endif
     });
-
-    function confirmDelete(id) {
-        swal({
-            title: "Apakah Anda yakin?",
-            text: "Data user yang dihapus tidak dapat dikembalikan!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Ya, hapus!",
-            cancelButtonText: "Batal",
-            closeOnConfirm: false,
-            closeOnCancel: false
-            }, function (isConfirm) {
-                if (isConfirm) {
-                    document.getElementById('delete-form-' + id).submit();
-                    swal("Terhapus!", "Data yang anda pilih telah terhapus.", "success");
-                } else {
-                    swal("Batal", "Data yang akan dihapus dibatalkan :)", "error");
-            } 
-        });
-    }
 
     function openCreateModal() {
         $('#modalTitle').text('Tambah Data Baru');

@@ -16,6 +16,13 @@
                             <input type="text" name="name" id="departmentName" class="form-control" placeholder="Contoh: Human Resources" required>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Deskripsi Departemen</label>
+                        <div class="col-sm-9">
+                            <textarea name="description" id="description" class="form-control" placeholder="Masukkan deskripsi ...">{{ old('description', $department->description ?? '') }}</textarea>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="modal-footer">

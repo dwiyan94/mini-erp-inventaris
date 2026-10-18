@@ -13,7 +13,6 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Pekerja</label>
                         <div class="col-sm-9">
-                            <!-- Tambahkan kelas chosen-select di sini -->
                             <select name="employee_id" id="employeeId" class="chosen-select form-control" data-placeholder="-- Pilih Pekerja --">
                                 <option value=""></option>
                                 @foreach($employees as $emp)
@@ -24,9 +23,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">Nama User</label>
+                        <label class="col-sm-3 control-label">Username</label>
                         <div class="col-sm-9">
-                            <input type="text" name="name" id="userName" class="form-control" placeholder="Nama lengkap user" required>
+                            <input type="text" name="name" id="userName" class="form-control" placeholder="Username anda" required>
                         </div>
                     </div>
 

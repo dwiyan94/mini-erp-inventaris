@@ -10,7 +10,7 @@ class Department extends Model
 {
     use HasFactory, SoftDeletes; 
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'description'];
 
     public function positions()
     {

@@ -1,9 +1,10 @@
 <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover">
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th width="10%" class="text-center">No</th>
-                <th class="text-center">Nama Departemen</th>
+                <th class="text-center">No</th>
+                <th>Nama Departemen</th>
+                <th>Deskripsi</th>
                 <th width="20%" class="text-center">Aksi</th>
             </tr>
         </thead>
@@ -18,9 +19,13 @@
                     </a>
                 </td>
 
+                <td>
+                    {{$department->description}}    
+                </td>
+
                 @canany(['edit-departments', 'delete-departments'])
                 <td class="text-center">
-                    <button type="button" class="btn btn-warning btn-xs" onclick="openEditModal('{{ $department->id }}', '{{ $department->name }}')">
+                    <button type="button" class="btn btn-warning btn-xs" onclick="openEditModal('{{ $department->id }}', '{{ $department->name }}', '{{$department->description}}')">
                         <i class="fa fa-pencil"></i> Edit
                     </button>
 

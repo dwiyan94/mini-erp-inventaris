@@ -1,12 +1,12 @@
 <div class="table-responsive">
-    <table class="table table-bordered table-hover">
+    <table class="table table-stripped table-hover">
         <thead>
             <tr>
                 <th class="text-center">No</th>
-                <th class="text-center">Nama Departemen</th>
-                <th class="text-center">Nama Posisi</th>
-                <th class="text-center">Deskripsi Tugas</th>
-                <th width="20%" class="text-center">Aksi</th>
+                <th width="15%">Departemen</th>
+                <th width="20%">Nama Posisi</th>
+                <th>Deskripsi Tugas</th>
+                <th width="10%" class="text-center">Aksi</th>
             </tr>
         </thead>
         <tbody>

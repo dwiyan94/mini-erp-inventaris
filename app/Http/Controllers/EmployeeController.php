@@ -6,14 +6,13 @@ use App\Models\Employee;
 use App\Models\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 class EmployeeController extends Controller
 {
     public function index(Request $request)
     {
-        if (!auth()->user()->can('view-users')) {
-            abort(403, 'Anda tidak memiliki hak akses ke halaman ini.');
-        }
+        Gate::authorize('view-employees');
         
         $search = $request->input('search');
 
@@ -40,6 +39,8 @@ class EmployeeController extends Controller
 
     public function edit(Employee $employee)
     {
+        Gate::authorize('edit-employees');
+
         $positions = Position::with('department')->get();
         return view('employees.form.form', compact('employee', 'positions'));
     }
@@ -71,6 +72,8 @@ class EmployeeController extends Controller
 
     public function update(Request $request, Employee $employee)
     {
+        Gate::authorize('edit-employees');
+
         $request->validate([
             'nik' => 'required|string|unique:employees,nik,' . $employee->id,
             'name' => 'required|string|max:255',
@@ -101,9 +104,7 @@ class EmployeeController extends Controller
 
     public function destroy(Employee $employee)
     {
-        if (!auth()->user()->can('delete-employess')) {
-            abort(403, 'Anda tidak memiliki hak akses.');
-        }
+        Gate::authorize('delete-employees');
 
         if ($employee->photo && file_exists(public_path('uploads/employees/' . $employee->photo))) {
             unlink(public_path('uploads/employees/' . $employee->photo));

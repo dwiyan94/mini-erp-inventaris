@@ -2,7 +2,7 @@
     <div class="col-sm-12">
         <form method="GET" action="{{ route('users.index') }}" class="form-inline pull-right">
             <div class="input-group">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama atau email..." class="form-control">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama atau email..." class="form-control" required>
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary">
                         <i class="fa fa-search"></i> Cari
