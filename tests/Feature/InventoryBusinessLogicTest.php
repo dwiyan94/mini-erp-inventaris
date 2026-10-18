@@ -63,7 +63,7 @@ class InventoryBusinessLogicTest extends TestCase
             'notes' => 'Pengeluaran melebihi stok',
         ]);
 
-        $response->dumpSession();
+        
         $response->assertSessionHas('error');
         $this->assertEquals(5, $product->fresh()->stock);
     }
