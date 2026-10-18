@@ -64,6 +64,7 @@ class InventoryBusinessLogicTest extends TestCase
         ]);
 
         $response->assertSessionHas('error');
+        
         $this->assertEquals(5, $product->fresh()->stock);
     }
 

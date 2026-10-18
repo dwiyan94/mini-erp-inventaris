@@ -82,9 +82,9 @@ class StockMutationController extends Controller
             if ($request->type === 'in') {
                 $stockAfter = $stockBefore + $request->quantity;
             } else {
-                if ($stockBefore < $request->quantity) {
-                    return back()->withErrors(['quantity' => 'Stok barang tidak mencukupi untuk pengeluaran ini.'])->withInput();
-                }
+                // if ($stockBefore < $request->quantity) {
+                //     return back()->withErrors(['quantity' => 'Stok barang tidak mencukupi untuk pengeluaran ini.'])->withInput();
+                // }
 
                 $stockAfter = $stockBefore - $request->quantity;
             }
@@ -150,7 +150,7 @@ class StockMutationController extends Controller
                     'product_name' => $mutation->product->name ?? 'Produk Dihapus',
                     'product_sku' => $mutation->product->sku ?? '-',
                     'user_name' => $mutation->user->name ?? 'System',
-                    'photo_url' => $mutation->photo ? asset('uploads/products/mutase/' . $mutation->photo) : null,
+                    'photo_url' => $mutation->photo ? asset('uploads/products/mutasi/' . $mutation->photo) : null,
                 ]
             ]);
         } catch (\Exception $e) {
